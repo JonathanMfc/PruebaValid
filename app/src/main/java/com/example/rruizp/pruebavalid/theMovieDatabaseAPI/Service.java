@@ -1,5 +1,9 @@
 package com.example.rruizp.pruebavalid.theMovieDatabaseAPI;
 
+import com.example.rruizp.pruebavalid.model.MovieResponse;
+import com.example.rruizp.pruebavalid.model.TvShowResponse;
+
+import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
