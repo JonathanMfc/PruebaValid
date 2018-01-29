@@ -1,5 +1,7 @@
 package com.example.rruizp.pruebavalid.theMovieDatabaseAPI;
 
+import com.example.rruizp.pruebavalid.pruebaValidDataBase.PruebaValidDataBase;
+
 import java.util.Locale;
 
 /**
@@ -8,7 +10,7 @@ import java.util.Locale;
 
 public class Constants {
 
-   // public static MovieClickDataBase movieClickDataBase;
+    public static PruebaValidDataBase pruebaValidDataBase;
     public static final String VERSION_URL = "/3/";
     public static final String BASE_URL = "https://api.themoviedb.org"+VERSION_URL;
     public static final String IMG_URL = "https://image.tmdb.org/t/p/w500";

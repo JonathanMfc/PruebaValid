@@ -94,7 +94,7 @@ public class MovieFragment extends Fragment implements MovieView {
                                     for (int i = 0; i < response.body().getResults().size(); i++) {
                                         moviesDB.add(response.body().getResults().get(i));
                                         response.body().getResults().get(i).setCategory(0);
-                                    //    Constants.movieClickDataBase.insertMovie(response.body().getResults().get(i));
+                                        Constants.pruebaValidDataBase.insertMovie(response.body().getResults().get(i));
                                     }
                                     movieAdapterPopular.addItemMore(response.body().getResults());
                                     movieAdapterPopular.setMoreLoading(false);
@@ -130,7 +130,7 @@ public class MovieFragment extends Fragment implements MovieView {
                                     for (int i = 0; i < response.body().getResults().size(); i++) {
                                         moviesDB.add(response.body().getResults().get(i));
                                         response.body().getResults().get(i).setCategory(1);
-                                       // Constants.movieClickDataBase.insertMovie(response.body().getResults().get(i));
+                                        Constants.pruebaValidDataBase.insertMovie(response.body().getResults().get(i));
                                     }
                                     movieAdapterTopRated.addItemMore(response.body().getResults());
                                     movieAdapterTopRated.setMoreLoading(false);
@@ -167,7 +167,7 @@ public class MovieFragment extends Fragment implements MovieView {
                                     for (int i = 0; i < response.body().getResults().size(); i++) {
                                         moviesDB.add(response.body().getResults().get(i));
                                         response.body().getResults().get(i).setCategory(2);
-                                     //   Constants.movieClickDataBase.insertMovie(response.body().getResults().get(i));
+                                        Constants.pruebaValidDataBase.insertMovie(response.body().getResults().get(i));
                                     }
                                     movieAdapterUpcoming.addItemMore(response.body().getResults());
                                     movieAdapterUpcoming.setMoreLoading(false);
@@ -262,20 +262,21 @@ public class MovieFragment extends Fragment implements MovieView {
     @Override
     public void movieError(String error) {
         Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
-     /*   if (!Constants.OK_NETWORK && Constants.movieClickDataBase.allMovies() != null){
+        if (!Constants.OK_NETWORK && Constants.pruebaValidDataBase.allMovies() != null){
+
             ArrayList<Movie> moviePopular = new ArrayList<>();
             ArrayList<Movie> movieTopRated = new ArrayList<>();
             ArrayList<Movie> movieUpcoming = new ArrayList<>();
-            for (int i = 0; i < Constants.movieClickDataBase.allMovies().size(); i++) {
-                switch (Constants.movieClickDataBase.allMovies().get(i).getCategory()){
+            for (int i = 0; i < Constants.pruebaValidDataBase.allMovies().size(); i++) {
+                switch (Constants.pruebaValidDataBase.allMovies().get(i).getCategory()){
                     case 0:
-                        moviePopular.add(Constants.movieClickDataBase.allMovies().get(i));
+                        moviePopular.add(Constants.pruebaValidDataBase.allMovies().get(i));
                         break;
                     case 1:
-                        movieTopRated.add(Constants.movieClickDataBase.allMovies().get(i));
+                        movieTopRated.add(Constants.pruebaValidDataBase.allMovies().get(i));
                         break;
                     case 2:
-                        movieUpcoming.add(Constants.movieClickDataBase.allMovies().get(i));
+                        movieUpcoming.add(Constants.pruebaValidDataBase.allMovies().get(i));
                         break;
                 }
             }
@@ -283,7 +284,7 @@ public class MovieFragment extends Fragment implements MovieView {
             movieAdapterTopRated.addAll(movieTopRated);
             movieAdapterUpcoming.addAll(movieUpcoming);
 
-        }*/
+        }
     }
 
     @Override

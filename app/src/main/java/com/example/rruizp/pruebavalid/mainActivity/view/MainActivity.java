@@ -42,6 +42,7 @@ import com.example.rruizp.pruebavalid.model.Movie;
 import com.example.rruizp.pruebavalid.model.MovieResponse;
 import com.example.rruizp.pruebavalid.model.TvShow;
 import com.example.rruizp.pruebavalid.model.TvShowResponse;
+import com.example.rruizp.pruebavalid.pruebaValidDataBase.PruebaValidDataBase;
 import com.example.rruizp.pruebavalid.theMovieDatabaseAPI.Constants;
 import com.example.rruizp.pruebavalid.theMovieDatabaseAPI.RestApiAdapter;
 import com.example.rruizp.pruebavalid.theMovieDatabaseAPI.Service;
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements MainView,Connecti
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-    //    Constants.movieClickDataBase = new MovieClickDataBase(this);
+        Constants.pruebaValidDataBase = new PruebaValidDataBase(this);
         progressLottie = new ProgressLottie(this);
         mainPresenter = new MainPresenterImpl(this);
 

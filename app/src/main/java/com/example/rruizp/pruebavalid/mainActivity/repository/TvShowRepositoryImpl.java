@@ -39,7 +39,7 @@ public class TvShowRepositoryImpl implements TvShowRepository {
                     for (int i = 0; i < response.body().getResults().size(); i++) {
                         tvShowsDB.add(response.body().getResults().get(i));
                         response.body().getResults().get(i).setCategory(0);
-                     //   Constants.movieClickDataBase.insertTvShow(response.body().getResults().get(i));
+                        Constants.pruebaValidDataBase.insertTvShow(response.body().getResults().get(i));
                     }
                     tvShowPresenter.showDataTvPopular(response.body().getResults());
                     Constants.POPULAR_TV_PAGE++;
@@ -68,7 +68,7 @@ public class TvShowRepositoryImpl implements TvShowRepository {
                     for (int i = 0; i < response.body().getResults().size(); i++) {
                         tvShowsDB.add(response.body().getResults().get(i));
                         response.body().getResults().get(i).setCategory(1);
-                      //  Constants.movieClickDataBase.insertTvShow(response.body().getResults().get(i));
+                        Constants.pruebaValidDataBase.insertTvShow(response.body().getResults().get(i));
                     }
                     tvShowPresenter.showDataTvTopRated(response.body().getResults());
                     Constants.TOP_RATED_TV_PAGE++;

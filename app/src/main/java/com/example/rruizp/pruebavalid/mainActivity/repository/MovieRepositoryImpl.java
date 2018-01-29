@@ -40,7 +40,7 @@ public class MovieRepositoryImpl implements MovieRepository {
                     for (int i = 0; i < response.body().getResults().size(); i++) {
                         moviesDB.add(response.body().getResults().get(i));
                         response.body().getResults().get(i).setCategory(0);
-                       // Constants.movieClickDataBase.insertMovie(response.body().getResults().get(i));
+                        Constants.pruebaValidDataBase.insertMovie(response.body().getResults().get(i));
                     }
                     moviePresenter.showDataMoviePopular(response.body().getResults());
                     Constants.POPULAR_MOVIE_PAGE++;
@@ -69,7 +69,7 @@ public class MovieRepositoryImpl implements MovieRepository {
                     for (int i = 0; i < response.body().getResults().size(); i++) {
                         moviesDB.add(response.body().getResults().get(i));
                         response.body().getResults().get(i).setCategory(1);
-//                        Constants.movieClickDataBase.insertMovie(response.body().getResults().get(i));
+                        Constants.pruebaValidDataBase.insertMovie(response.body().getResults().get(i));
                     }
                     moviePresenter.showDataMovieTopRated(response.body().getResults());
                     Constants.TOP_RATED_MOVIE_PAGE++;
@@ -97,7 +97,7 @@ public class MovieRepositoryImpl implements MovieRepository {
                     for (int i = 0; i < response.body().getResults().size(); i++) {
                         moviesDB.add(response.body().getResults().get(i));
                         response.body().getResults().get(i).setCategory(2);
-                      //  Constants.movieClickDataBase.insertMovie(response.body().getResults().get(i));
+                        Constants.pruebaValidDataBase.insertMovie(response.body().getResults().get(i));
                     }
                     moviePresenter.showDataMovieUpcoming(response.body().getResults());
                     Constants.UPCOMING_MOVIE_PAGE = response.body().getPage();
