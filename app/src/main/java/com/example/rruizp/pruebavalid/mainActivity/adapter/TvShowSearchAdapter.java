@@ -1,4 +1,4 @@
-package com.example.rruizp.pruebavalid.adapter;
+package com.example.rruizp.pruebavalid.mainActivity.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.rruizp.pruebavalid.R;
 import com.example.rruizp.pruebavalid.detailActivity.view.DetailActivity;
-import com.example.rruizp.pruebavalid.model.Movie;
+import com.example.rruizp.pruebavalid.model.TvShow;
 import com.example.rruizp.pruebavalid.theMovieDatabaseAPI.Constants;
 
 import java.text.ParseException;
@@ -28,37 +28,37 @@ import java.util.Locale;
  * Created by Rruizp on 29/01/2018.
  */
 
-public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
+public class TvShowSearchAdapter extends RecyclerView.Adapter<TvShowSearchAdapter.TvShowSearchViewHolder> {
 
     Context context;
-    ArrayList<Movie> movies;
+    ArrayList<TvShow> tvShows;
     int page;
 
-    private OnLoadMoreListener onLoadMoreListener;
+    private TvShowSearchAdapter.OnLoadMoreListener onLoadMoreListener;
     private LinearLayoutManager mLinearLayoutManager;
 
     private boolean isMoreLoading = false;
     private int visibleThreshold = 1;
     int firstVisibleItem, visibleItemCount, totalItemCount;
 
-    public interface OnLoadMoreListener{
+    public interface OnLoadMoreListener {
         void onLoadMore(int pages);
     }
 
 
-    public MovieAdapter(Context context,OnLoadMoreListener onLoadMoreListener,int page) {
+    public TvShowSearchAdapter(Context context, TvShowSearchAdapter.OnLoadMoreListener onLoadMoreListener, int page) {
         this.context = context;
-        this.movies = new ArrayList<>();
+        this.tvShows = new ArrayList<>();
         this.onLoadMoreListener = onLoadMoreListener;
         this.page = page;
     }
 
 
-    public void setLinearLayoutManager(LinearLayoutManager linearLayoutManager){
-        this.mLinearLayoutManager=linearLayoutManager;
+    public void setLinearLayoutManager(LinearLayoutManager linearLayoutManager) {
+        this.mLinearLayoutManager = linearLayoutManager;
     }
 
-    public void setRecyclerView(RecyclerView mView){
+    public void setRecyclerView(RecyclerView mView) {
         mView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -66,7 +66,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
                 visibleItemCount = recyclerView.getChildCount();
                 totalItemCount = mLinearLayoutManager.getItemCount();
                 firstVisibleItem = mLinearLayoutManager.findFirstVisibleItemPosition();
-                if (!isMoreLoading && (totalItemCount - visibleItemCount)<= (firstVisibleItem + visibleThreshold)) {
+                if (!isMoreLoading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold)) {
                     if (onLoadMoreListener != null) {
                         onLoadMoreListener.onLoadMore(page);
                     }
@@ -76,15 +76,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         });
     }
 
-    public void addItemMore(ArrayList<Movie> movies_new){
-        movies.addAll(movies_new);
-        notifyItemRangeChanged(0,movies.size());
+    public void addItemMore(ArrayList<TvShow> tv_new) {
+        tvShows.addAll(tv_new);
+        notifyItemRangeChanged(0, tvShows.size());
     }
 
 
-
     public void setMoreLoading(boolean isMoreLoading) {
-        this.isMoreLoading=isMoreLoading;
+        this.isMoreLoading = isMoreLoading;
     }
 
     public void setProgressMore(final boolean isProgress) {
@@ -92,69 +91,67 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             new Handler().post(new Runnable() {
                 @Override
                 public void run() {
-                    movies.add(null);
-                    notifyItemInserted(movies.size() - 1);
+                    tvShows.add(null);
+                    notifyItemInserted(tvShows.size() - 1);
                 }
             });
         } else {
-            movies.remove(movies.size() - 1);
-            notifyItemRemoved(movies.size());
+            tvShows.remove(tvShows.size() - 1);
+            notifyItemRemoved(tvShows.size());
         }
     }
 
 
-
-
     @Override
-    public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(context).inflate(R.layout.view_item_movie_tv,parent,false);
-        return new MovieViewHolder(itemView);
+    public TvShowSearchViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(context).inflate(R.layout.item_result, parent, false);
+        return new TvShowSearchViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(MovieViewHolder holder, int position) {
-        Movie movie = movies.get(position);
-        if (movie != null){
+    public void onBindViewHolder(TvShowSearchAdapter.TvShowSearchViewHolder holder, int position) {
+        TvShow tvShow = tvShows.get(position);
+        if (tvShow != null) {
 
-            holder.setData(movie.getPoster_path(),movie.getTitle(),movie.getRelease_date(),movie.getVote_average(),movie.getId(),movie.getBackdrop_path(),movie.getOverview());
+            holder.setData(tvShow.getPoster_path(), tvShow.getName(), tvShow.getFirst_air_date(), tvShow.getVote_average(), tvShow.getId(), tvShow.getBackdrop_path(), tvShow.getOverview());
         }
 
     }
 
     @Override
     public int getItemCount() {
-        return movies.size();
+        return tvShows.size();
     }
 
-    public void addAll(ArrayList<Movie> movies){
-        if (movies != null){
-            this.movies.addAll(movies);
+    public void addAll(ArrayList<TvShow> tvShows) {
+        if (tvShows != null) {
+            this.tvShows.addAll(tvShows);
             notifyDataSetChanged();
         }
     }
 
 
-    public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class TvShowSearchViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView img_poster;
-        TextView score,title_item,year_item;
-        String title_intent,date_intent,average_intent,img_intent,overview_intent;
+        TextView score, title_item, year_item;
+        String title_intent, date_intent, average_intent, img_intent, overview_intent;
         int id_intent;
 
-        public MovieViewHolder(View itemView) {
+        public TvShowSearchViewHolder(View itemView) {
             super(itemView);
 
-            title_item = (TextView)itemView.findViewById(R.id.title_item);
-            score = (TextView)itemView.findViewById(R.id.score);
-            year_item = (TextView)itemView.findViewById(R.id.year_item);
-            img_poster = (ImageView)itemView.findViewById(R.id.img_poster);
+            title_item = (TextView) itemView.findViewById(R.id.title_item);
+            score = (TextView) itemView.findViewById(R.id.score);
+            year_item = (TextView) itemView.findViewById(R.id.year_item);
+            img_poster = (ImageView) itemView.findViewById(R.id.img_poster);
             itemView.setOnClickListener(this);
         }
 
         public void setData(String poster_path, String title, String release_date, double vote_average, int id, String backdrop_path, String overview) {
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-            SimpleDateFormat output = new SimpleDateFormat("yyyy",Locale.US);
+            SimpleDateFormat output = new SimpleDateFormat("yyyy", Locale.US);
             try {
                 Date dateMovie = sdf.parse(release_date);
                 String formattedTime = output.format(dateMovie);
@@ -166,7 +163,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
                 e.printStackTrace();
             }
 
-            Glide.with(context).load(Constants.IMG_URL+poster_path).apply(new RequestOptions().placeholder(R.drawable.placeholder)).into(img_poster);
+            Glide.with(context).load(Constants.IMG_URL + poster_path).apply(new RequestOptions().placeholder(R.drawable.placeholder)).into(img_poster);
             title_item.setText(title);
             score.setText(String.valueOf(vote_average));
 
@@ -179,17 +176,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
         @Override
         public void onClick(View view) {
-            Constants.POPULAR_MOVIE_PAGE = 1;
-            Constants.TOP_RATED_MOVIE_PAGE = 1;
-            Constants.UPCOMING_MOVIE_PAGE = 1;
-            Constants.RECOMMENDATION_MOVIE_PAGE = 1;
-            Intent intent = new Intent(context,DetailActivity.class);
-            intent.putExtra("title",title_intent);
-            intent.putExtra("date",date_intent);
-            intent.putExtra("img",img_intent);
-            intent.putExtra("id",id_intent);
-            intent.putExtra("score",average_intent);
-            intent.putExtra("overview",overview_intent);
+            Constants.SEARCH_TV_PAGE = 1;
+            Intent intent = new Intent(context, DetailActivity.class);
+            intent.putExtra("title", title_intent);
+            intent.putExtra("date", date_intent);
+            intent.putExtra("img", img_intent);
+            intent.putExtra("id", id_intent);
+            intent.putExtra("score", average_intent);
+            intent.putExtra("overview", overview_intent);
             intent.putExtra("type", Constants.MOVIE);
             context.startActivity(intent);
         }

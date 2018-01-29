@@ -1,8 +1,8 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/colorPrimaryDark" />
+    <item android:drawable="@android:color/white" />
     <item android:bottom="80dp">
         <bitmap
             android:gravity="center"
-            android:src="@drawable/logobar" />
+            android:src="@mipmap/ic_launcher_round" />
     </item >
 </layer-list>

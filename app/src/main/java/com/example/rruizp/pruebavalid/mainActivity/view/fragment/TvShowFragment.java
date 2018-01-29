@@ -93,7 +93,7 @@ public class TvShowFragment extends Fragment implements TvShowView{
                                     for (int i = 0; i < response.body().getResults().size(); i++) {
                                         tvShowsDB.add(response.body().getResults().get(i));
                                         response.body().getResults().get(i).setCategory(0);
-                                        Constants.movieClickDataBase.insertTvShow(response.body().getResults().get(i));
+                                  //      Constants.movieClickDataBase.insertTvShow(response.body().getResults().get(i));
                                     }
                                     tvShowAdapterPopular.addItemMore(response.body().getResults());
                                     tvShowAdapterPopular.setMoreLoading(false);
@@ -130,7 +130,7 @@ public class TvShowFragment extends Fragment implements TvShowView{
                                     for (int i = 0; i < response.body().getResults().size(); i++) {
                                         tvShowsDB.add(response.body().getResults().get(i));
                                         response.body().getResults().get(i).setCategory(1);
-                                        Constants.movieClickDataBase.insertTvShow(response.body().getResults().get(i));
+                                      //  Constants.movieClickDataBase.insertTvShow(response.body().getResults().get(i));
                                     }
                                     tvShowAdapterTopRated.addItemMore(response.body().getResults());
                                     tvShowAdapterTopRated.setMoreLoading(false);
@@ -206,7 +206,7 @@ public class TvShowFragment extends Fragment implements TvShowView{
     @Override
     public void tvError(String error) {
         Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
-        if (!Constants.OK_NETWORK && Constants.movieClickDataBase.allTvShows() != null){
+       /* if (!Constants.OK_NETWORK && Constants.movieClickDataBase.allTvShows() != null){
             ArrayList<TvShow> tvShowsPopular = new ArrayList<>();
             ArrayList<TvShow> tvShowsTopRated = new ArrayList<>();
             for (int i = 0; i < Constants.movieClickDataBase.allTvShows().size(); i++) {
@@ -222,7 +222,7 @@ public class TvShowFragment extends Fragment implements TvShowView{
             tvShowAdapterPopular.addAll(tvShowsPopular);
             tvShowAdapterTopRated.addAll(tvShowsTopRated);
 
-        }
+        }*/
     }
 
     @Override

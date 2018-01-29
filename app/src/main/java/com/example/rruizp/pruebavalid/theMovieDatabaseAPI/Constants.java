@@ -8,7 +8,7 @@ import java.util.Locale;
 
 public class Constants {
 
-    public static MovieClickDataBase movieClickDataBase;
+   // public static MovieClickDataBase movieClickDataBase;
     public static final String VERSION_URL = "/3/";
     public static final String BASE_URL = "https://api.themoviedb.org"+VERSION_URL;
     public static final String IMG_URL = "https://image.tmdb.org/t/p/w500";

@@ -16,6 +16,7 @@ import com.example.rruizp.pruebavalid.BuildConfig;
 import com.example.rruizp.pruebavalid.R;
 import com.example.rruizp.pruebavalid.adapter.MovieAdapter;
 import com.example.rruizp.pruebavalid.mainActivity.presenter.MoviePresenter;
+import com.example.rruizp.pruebavalid.mainActivity.presenter.MoviePresenterImpl;
 import com.example.rruizp.pruebavalid.model.Movie;
 import com.example.rruizp.pruebavalid.model.MovieResponse;
 import com.example.rruizp.pruebavalid.theMovieDatabaseAPI.Constants;
@@ -74,6 +75,7 @@ public class MovieFragment extends Fragment implements MovieView {
         super.onActivityCreated(savedInstanceState);
 
         progressLottie = new ProgressLottie(getActivity());
+        moviePresenter = new MoviePresenterImpl(this);
 
         popularOnloadMoreListener = new MovieAdapter.OnLoadMoreListener() {
             @Override
@@ -92,7 +94,7 @@ public class MovieFragment extends Fragment implements MovieView {
                                     for (int i = 0; i < response.body().getResults().size(); i++) {
                                         moviesDB.add(response.body().getResults().get(i));
                                         response.body().getResults().get(i).setCategory(0);
-                                        Constants.movieClickDataBase.insertMovie(response.body().getResults().get(i));
+                                    //    Constants.movieClickDataBase.insertMovie(response.body().getResults().get(i));
                                     }
                                     movieAdapterPopular.addItemMore(response.body().getResults());
                                     movieAdapterPopular.setMoreLoading(false);
@@ -128,7 +130,7 @@ public class MovieFragment extends Fragment implements MovieView {
                                     for (int i = 0; i < response.body().getResults().size(); i++) {
                                         moviesDB.add(response.body().getResults().get(i));
                                         response.body().getResults().get(i).setCategory(1);
-                                        Constants.movieClickDataBase.insertMovie(response.body().getResults().get(i));
+                                       // Constants.movieClickDataBase.insertMovie(response.body().getResults().get(i));
                                     }
                                     movieAdapterTopRated.addItemMore(response.body().getResults());
                                     movieAdapterTopRated.setMoreLoading(false);
@@ -165,7 +167,7 @@ public class MovieFragment extends Fragment implements MovieView {
                                     for (int i = 0; i < response.body().getResults().size(); i++) {
                                         moviesDB.add(response.body().getResults().get(i));
                                         response.body().getResults().get(i).setCategory(2);
-                                        Constants.movieClickDataBase.insertMovie(response.body().getResults().get(i));
+                                     //   Constants.movieClickDataBase.insertMovie(response.body().getResults().get(i));
                                     }
                                     movieAdapterUpcoming.addItemMore(response.body().getResults());
                                     movieAdapterUpcoming.setMoreLoading(false);
@@ -260,7 +262,7 @@ public class MovieFragment extends Fragment implements MovieView {
     @Override
     public void movieError(String error) {
         Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
-        if (!Constants.OK_NETWORK && Constants.movieClickDataBase.allMovies() != null){
+     /*   if (!Constants.OK_NETWORK && Constants.movieClickDataBase.allMovies() != null){
             ArrayList<Movie> moviePopular = new ArrayList<>();
             ArrayList<Movie> movieTopRated = new ArrayList<>();
             ArrayList<Movie> movieUpcoming = new ArrayList<>();
@@ -281,7 +283,7 @@ public class MovieFragment extends Fragment implements MovieView {
             movieAdapterTopRated.addAll(movieTopRated);
             movieAdapterUpcoming.addAll(movieUpcoming);
 
-        }
+        }*/
     }
 
     @Override

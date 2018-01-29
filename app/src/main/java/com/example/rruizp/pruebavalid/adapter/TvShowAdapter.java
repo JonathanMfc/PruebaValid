@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.rruizp.pruebavalid.R;
+import com.example.rruizp.pruebavalid.detailActivity.view.DetailActivity;
 import com.example.rruizp.pruebavalid.model.Movie;
 import com.example.rruizp.pruebavalid.model.TvShow;
 import com.example.rruizp.pruebavalid.theMovieDatabaseAPI.Constants;
