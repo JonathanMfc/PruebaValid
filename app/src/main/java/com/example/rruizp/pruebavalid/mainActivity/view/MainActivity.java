@@ -28,8 +28,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.rruizp.pruebavalid.AppGlobal;
 import com.example.rruizp.pruebavalid.BuildConfig;
 import com.example.rruizp.pruebavalid.R;
+import com.example.rruizp.pruebavalid.broadcast.ConnectivityReceiver;
 import com.example.rruizp.pruebavalid.mainActivity.adapter.MovieSearchAdapter;
 import com.example.rruizp.pruebavalid.mainActivity.adapter.TvShowSearchAdapter;
 import com.example.rruizp.pruebavalid.mainActivity.presenter.MainPresenter;
@@ -54,7 +56,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements MainView{
+public class MainActivity extends AppCompatActivity implements MainView,ConnectivityReceiver.ConnectivityReceiverListener{
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -172,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements MainView{
     }
 
     private void checkConnection() {
-       // Constants.OK_NETWORK = ConnectivityReceiver.isConnected();
+        Constants.OK_NETWORK = ConnectivityReceiver.isConnected();
 
     }
 
@@ -463,5 +465,17 @@ public class MainActivity extends AppCompatActivity implements MainView{
     @Override
     public void hideProgress() {
         progressLottie.dismiss();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AppGlobal.getInstance().setConnectivityListener(this);
+
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        Constants.OK_NETWORK = isConnected;
     }
 }
