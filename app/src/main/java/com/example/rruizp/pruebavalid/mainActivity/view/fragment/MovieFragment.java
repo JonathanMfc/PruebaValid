@@ -2,18 +2,38 @@ package com.example.rruizp.pruebavalid.mainActivity.view.fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.rruizp.pruebavalid.R;
+import com.example.rruizp.pruebavalid.theMovieDatabaseAPI.RestApiAdapter;
+import com.example.rruizp.pruebavalid.theMovieDatabaseAPI.Service;
+import com.example.rruizp.pruebavalid.utils.ProgressLottie;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class MovieFragment extends Fragment {
 
+    @BindView(R.id.popular_movie_list)
+    RecyclerView popularMovieList;
+    @BindView(R.id.top_rated_movie_list)
+    RecyclerView topRatedMovieList;
+    @BindView(R.id.upcoming_movie_list)
+    RecyclerView upcomingMovieList;
+    Unbinder unbinder;
+
+    ProgressLottie progressLottie;
+
+    Service service = RestApiAdapter.createService(Service.class);
 
     public MovieFragment() {
         // Required empty public constructor
@@ -24,7 +44,22 @@ public class MovieFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_movie, container, false);
+        View view = inflater.inflate(R.layout.fragment_movie, container, false);
+        unbinder = ButterKnife.bind(this, view);
+        return view;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        progressLottie = new ProgressLottie(getActivity());
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 }
